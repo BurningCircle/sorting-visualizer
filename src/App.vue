@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <app-menu/>
+    <router-view></router-view>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { Menu } from "@components/menu"
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default {
+  name: "app",
+  components:{
+    'app-menu': Menu
+  },
+  created(){
+    this.$store.commit('set_amount', 50)
+    this.$store.dispatch('generateRandomArray')
   }
 }
+</script>
+
+<style lang="sass">
+*
+  box-sizing: border-box
+
+html,
+body
+  width: 100%
+  height: 100%
+  margin: 0
+
+#app
+  position: relative
+  width: 100%
+  height: 100%
+  background: $base_color
+  display: grid
+  grid-template-columns: 80px auto
 </style>
